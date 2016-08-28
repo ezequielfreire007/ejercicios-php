@@ -1,0 +1,9 @@
+[Thu Jul 21 17:58:49.048391 2016] [authz_core:error] [pid 32340] [client 127.0.0.1:59292] AH01630: client denied by server configuration: /home/ezequiel/ejercicios-php/miejemplo/www/
+[Thu Jul 21 17:58:49.244642 2016] [authz_core:error] [pid 32340] [client 127.0.0.1:59292] AH01630: client denied by server configuration: /home/ezequiel/ejercicios-php/miejemplo/www/favicon.ico
+[Thu Jul 21 17:58:53.269485 2016] [authz_core:error] [pid 32340] [client 127.0.0.1:59292] AH01630: client denied by server configuration: /home/ezequiel/ejercicios-php/miejemplo/www/
+[Fri Jul 22 19:08:54.994379 2016] [authz_core:error] [pid 2858] [client 127.0.0.1:46060] AH01630: client denied by server configuration: /home/ezequiel/ejercicios-php/miejemplo/www/
+[Fri Jul 22 19:08:55.221132 2016] [authz_core:error] [pid 2858] [client 127.0.0.1:46060] AH01630: client denied by server configuration: /home/ezequiel/ejercicios-php/miejemplo/www/favicon.ico
+[Fri Jul 22 19:12:38.409525 2016] [authz_core:error] [pid 2859] [client 127.0.0.1:46072] AH01630: client denied by server configuration: /home/ezequiel/ejercicios-php/miejemplo/www/
+[Fri Jul 22 19:16:49.799588 2016] [authz_core:error] [pid 2860] [client 127.0.0.1:46208] AH01630: client denied by server configuration: /home/ezequiel/ejercicios-php/miejemplo/www/www
+[Fri Jul 22 19:16:59.326412 2016] [authz_core:error] [pid 2861] [client 127.0.0.1:46210] AH01630: client denied by server configuration: /home/ezequiel/ejercicios-php/miejemplo/www/www
+[Fri Jul 22 19:17:08.405800 2016] [authz_core:error] [pid 2862] [client 127.0.0.1:46212] AH01630: client denied by server configuration: /home/ezequiel/ejercicios-php/miejemplo/www/
