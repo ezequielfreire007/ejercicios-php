@@ -25,7 +25,7 @@
     //var_dump($cartuchera);
 
     //print_r($cartuchera);
-    
+
 
     echo "<br>";
     echo "La cartuchera contiene: ".'<br>';
