@@ -1,3 +1,4 @@
+
 <?php
 
 	$suma = 0;
@@ -6,7 +7,7 @@
 	do{
 		$suma += $num;
 		$num++;
-		echo "$num";
+		echo "$suma";
 		echo "<br>";
 	}while($suma < 1000);
 
@@ -14,4 +15,4 @@
 	echo "<br>";
 	echo "$num";
 
-?>
+ ?>
