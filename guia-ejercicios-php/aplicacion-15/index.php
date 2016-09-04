@@ -1,8 +1,8 @@
 <?php
 
     ##Incluyo los archivos de Rectangulo y Triangulo
-    include_once "clases/Rectangulo.php";
-    include_once "clases/Triangulo.php";
+    require_once "clases/Rectangulo.php";
+    require_once "clases/Triangulo.php";
 
     ##Intancio dos objetos
     $objRectangulo = new Rectangulo(3,5);

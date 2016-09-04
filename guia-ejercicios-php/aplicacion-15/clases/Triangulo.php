@@ -1,6 +1,6 @@
 <?php
 
-    include_once "FiguraGeometrica.php";
+    require_once "FiguraGeometrica.php";
     /**
      *
      */
@@ -30,9 +30,12 @@
         public function dibujar()
         {
             echo "####### Dibuja triangulo #######".'<br>';
-        /*    for ($i=1; $i <= $this->_altura ; $i++) {
-
-        } */
+            $aux = "";
+            for ($i=1; $i <= $this->_altura ; $i++) {
+                $aux .= "*";
+                echo $aux;
+                echo "<br>";
+            }
         }
 
         public function toString(){
