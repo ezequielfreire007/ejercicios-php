@@ -11,7 +11,7 @@
         private $_ladoDos;
 
         #Constructor
-        function __construct($ladoUno,$ladoDos)
+        public function __construct($ladoUno,$ladoDos)
         {
             parent::__construct();
             $this->_ladoUno = $ladoUno;

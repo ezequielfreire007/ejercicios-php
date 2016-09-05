@@ -17,7 +17,7 @@
         public $perimetro;
 
         #Construcor
-        function __construct($v1,$v3)
+        public function __construct($v1,$v3)
         {
             $this->_vertice1 = $v1;
             $this->_vertice2 = new Punto($v3->getX(),$v1->getY());

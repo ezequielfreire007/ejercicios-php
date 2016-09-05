@@ -13,7 +13,7 @@
         private $_base;
 
         #Constructor
-        function __construct($base,$altura)
+        public function __construct($base,$altura)
         {
             parent::__construct();
             $this->_base = $base;
