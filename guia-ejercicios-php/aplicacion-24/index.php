@@ -63,6 +63,8 @@
 				<?php 
 					echo empty($fila);
 					echo empty($columna);
+					// empty devuleve true si no esta seteada las variables
+					// por esa razon negamos el empty para que ingrese si se encuentran seteadas
 					if(!empty($fila) && !empty($columna)){
 						for ($i=1; $i < $fila; $i++) { 
 							echo "<tr>";
@@ -74,8 +76,6 @@
 					}						
 				 ?>
 			</table>
-
-
 		</form>
 	</body>
 </html>
