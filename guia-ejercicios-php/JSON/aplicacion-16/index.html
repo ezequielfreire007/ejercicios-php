@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Aplicacion 16</title>
+		<!-- Agrego la libreria jquery al proyecto-->
+		<script type="text/javascript" src="jquery.js"></script>
+		<!-- Jquery ajax encargado de realizar las vistas dinamiscas y consultas con el server -->
+		<script type="text/javascript">
+
+			function mostrar(){
+
+				var pagina = "administrarRemeras.php";
+
+				$.ajax({
+					type:'post',
+					url:pagina,
+					dataType:'text',
+					data:{queHago: 'traerRemerasFiltradasPorCampo', txtFiltrar: $("#txtFiltrar").val(), selectOption: $("#selectOption").val()},
+					async: true
+				})
+				.done(function(repuesta){
+					alert(respuesta); //se utiliza un alert y break para realizar un test de lo que devuelve el server
+					return;
+					//Se parsea a json ya que se recibe texto desde el server
+					var objJSON = JSON.parse(respuesta);
+
+					//Tabla dinamica
+					var tabla = '<table>' // tr y th para encabezados de la tabla
+					tabla +=    '	<tr>';
+					tabla +=    '		<th>id</th>';
+					tabla +=    '		<th>slogan</th>';
+					tabla +=    '		<th>size</th>';
+					tabla +=    '		<th>price</th>';
+					tabla +=    '		<th>color</th>';
+					tabla +=    '		<th>name</th>';
+					tabla +=    '		<th>logo</th>';
+					tabla +=    '		<th>country</th>';
+					tabla +=    '		<th>city</th>';
+					tabla +=    '	<tr>';
+
+					//Reocorro el objeto JSON y muestro cada objeto en la tabla
+					for (var i = 0; i < objJSON.length; i++) {
+						tabla += '  <tr>';
+						tabla += '  	<td>'+objJSON[i].id+'</td>';
+						tabla += '  	<td>'+objJSON[i].slogan+'</td>';
+						tabla += '  	<td>'+objJSON[i].size+'</td>';
+						tabla += '  	<td>'+objJSON[i].price+'</td>';
+						tabla += '  	<td>'+objJSON[i].color+'</td>';
+						tabla += '  	<td>'+objJSON[i].manofacturer.name+'</td>';
+						tabla += '  	<td>'+objJSON[i].manofacturer.logo+'</td>';
+						tabla += '  	<td>'+'<img src='+objJSON[i].manofacturer.location.country+'/>'+'</td>';
+						tabla += '  	<td>'+objJSON[i].manofacturer.location.city+'</td>';
+						tabla += '  </tr>';
+					}
+
+					tabla += '    </table>';
+					//muestro la tabla dinamica en el div mostrarFiltrado
+					$("#mostrarFiltrado").html(tabla);
+				})
+				.fail(function(respuesta){
+					alert(respuesta);
+					alert("Error en php");
+				})
+
+			}	
+
+		</script>
+	</head>
+
+	<body>
+		<div id="menuFiltrado">
+			<input type="text" id="txtFiltrar">
+			<select id="selectOption">
+				<option value="tamano">Tamaño</option>
+				<option value="color">Color</option>
+				<option value="pais">pais</option>
+			</select><br>
+			<input type="button" value="Filtrar" onclick= "mostrar()">
+		</div>
+
+		<div id="mostrarFiltrado">
+			
+		</div>
+	</body>
+
+</html>
