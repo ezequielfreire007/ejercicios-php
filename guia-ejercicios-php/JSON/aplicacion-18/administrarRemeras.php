@@ -171,5 +171,42 @@
         	echo $agregado;
 
 			break; //fin de agregar remeras	
+
+		case 'quitarRemera':
+			
+			$error = "Error";
+			$elemento = isset($_POST['id']) ? $_POST['id']:NULL;
+			$arrayJson = array();
+
+			if (!file_exists("remeras.json")) {
+				return $error;
+			}
+
+			$archivo = fopen("remeras.json", "r");
+			$remeras = "";
+			while (!feof($archivo)) {
+				$remeras .= fgets($archivo);
+			}
+			fclose($archivo);
+
+			$arrayJson = json_decode($remeras);
+
+
+			for ($i=0; $i < count($arrayJson); $i++) { 
+				if ($arrayJson[$i]->id == $elemento) {
+					unset($arrayJson[$i]);
+					break;
+				}
+			}
+
+			$txtJsonEncode = json_encode($arrayJson);
+			$archivoEliminar = fopen("remeras.json", "w");
+			fwrite($archivoEliminar, $txtJsonEncode);
+
+			fclose($archivoEliminar);
+
+			echo "Se elimino elemento";
+
+			break;
 	}
  ?>

@@ -2,20 +2,23 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Aplicacion n°17</title>
+		<title>Aplicacion n°18</title>
 		<!-- Agrego la libreria de jquery-->
 		<script type="text/javascript" src="jquery.js"></script>
 		
 		<script type="text/javascript">
-			
-		    var eleccion = "";
 
+			//variables globales
+		    var eleccion = "";
+            var objJSON = "";
+            var pagina = "administrarRemeras.php";			
 		   
 			function mostrar(hacerAlgo){
 
 				eleccion = hacerAlgo;
 				alert(eleccion);
 				var pagina = "administrarRemeras.php";
+
 				//var pagina = "testIndex.php";
 
 				$.ajax({
@@ -68,7 +71,8 @@
 						tabla += '  	<td>'+'<img src='+objJSON[i].manofacturer.logo+'/>'+'</td>';
 						tabla += '  	<td>'+objJSON[i].manofacturer.location.country+'</td>';
 						tabla += '  	<td>'+objJSON[i].manofacturer.location.city+'</td>';
-						tabla += '      <td><a id='+objJSON[i].id+' onclick='+alert("hola")+'>eliminar</td>';
+						tabla += '      <td><input type="button" value="Eliminar" onclick=eliminiarElemento('+objJSON[i].id+')></td>';
+
 						tabla += '  </tr>';
 					}
 
@@ -80,7 +84,27 @@
 					alert(respuesta);
 					alert("Error en php");
 				})
+			}
 
+			//Eliminar elemento seleccionado
+			function eliminiarElemento(elemento){
+				alert(elemento);
+				//return;
+				$.ajax({
+					type:'post',
+					url: pagina,
+					dataType:'text',
+					data: { queHago:"quitarRemera", id:elemento}, 
+					async:true
+				})
+				.done(function(respuesta){
+					alert(respuesta);
+					return;		
+				})
+				.fail(function(respuesta){
+					alert(respuesta);
+					alert("Error en php");
+				})
 
 			}
 		</script>
