@@ -208,5 +208,15 @@
 			echo "Se elimino elemento";
 
 			break;
+			
+		case 'modificarRemeras':
+			
+			/*$objetoModificado = isset($_POST['objetoModificar']) ? $_POST['objetoModificar']:NULL;
+			$arrayAux = array();
+			$archivoLectura = fopen("remeras.json", "r");
+
+			fclose($archivoLectura)	*/
+
+			break;
 	}
  ?>
