@@ -211,11 +211,28 @@
 			
 		case 'modificarRemeras':
 			
-			/*$objetoModificado = isset($_POST['objetoModificar']) ? $_POST['objetoModificar']:NULL;
+			$objetoModificado = isset($_POST['objetoModificar']) ? $_POST['objetoModificar']:NULL;
 			$arrayAux = array();
 			$archivoLectura = fopen("remeras.json", "r");
+			$textJson = "";
 
-			fclose($archivoLectura)	*/
+			//tomo los datos del archivo y los decodeo
+			while (!feof($archivoLectura)) {
+				$textJson .= fgetc($archivoLectura);
+			}
+
+			$miJsonArray = json_decode($textJson);
+
+			//recorremos el array de json para remplazar el objeto por el nuevo
+			foreach ($arrayAux as $objJson) {
+				if ($objJSON->id == $objetoModificar->id) {
+					$objJson = $objetoModificar;
+					echo "Ingreso al foreach";
+					break;
+				}
+			}
+
+			fclose($archivoLectura)
 
 			break;
 	}
