@@ -212,7 +212,7 @@
 		case 'modificarRemeras':
 			
 			$objetoModificado = isset($_POST['objetoModificar']) ? $_POST['objetoModificar']:NULL;
-			$arrayAux = array();
+			//$arrayAux = array();
 			$archivoLectura = fopen("remeras.json", "r");
 			$textJson = "";
 
@@ -221,19 +221,38 @@
 				$textJson .= fgetc($archivoLectura);
 			}
 
-			$miJsonArray = json_decode($textJson);
+			$arrayJson = json_decode($textJson);
 
 			//recorremos el array de json para remplazar el objeto por el nuevo
-			foreach ($arrayAux as $objJson) {
+			/*foreach ($arrayAux as $objJson) {
 				if ($objJSON->id == $objetoModificar->id) {
-					$objJson = $objetoModificar;
-					echo "Ingreso al foreach";
+					$objJSON->id = $objetoModificar->id;
+					$objJson->slogan = $objetoModificar->slogan;
+					$objJson->size = $objetoModificar->size;
+					$objJson->price = $objetoModificar->price;
+					$objJson->color = $objetoModificar->color;
+					$objJson->manofacturer->name = $objetoModificar->manofacturer->name;
+					$objJson->manofacturer->location->country = $objetoModificar->manofacturer->location->country;
+					$objJson->manofacturer->location->city = $objetoModificar->manofacturer->location->city;
+					echo "Ingreso al foreach";	
 					break;
+				}
+			}*/
+            $arrayAux = array();
+			for ($i=0; $i < count($arrayJson); $i++) { 
+				if ($arrayJson[$i]->id == $objetoModificado->id) {
+					array_push($arrayAux, $objetoModificado);
+				}else{
+					array_push($arrayAux, $arrayJson[$i]);	
 				}
 			}
 
+			$arrayEncode = array();
+
+			$arrayEncode = array_replace($arrayJson, $arrayAux);
+
 			//Encodeo el array json a un string json con el elemento modificado
-			$miJsonEncodeado = json_encode($miJsonArray);
+			$miJsonEncodeado = json_encode($$arrayEncode);
 			$archivoEscribir = fopen("remeras.json", "w");
 			fwrite($archivoEscribir, $miJsonEncodeado);
 
