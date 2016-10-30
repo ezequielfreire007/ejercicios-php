@@ -90,6 +90,9 @@
 			function eliminiarElemento(elemento){
 				alert(elemento);
 				//return;
+				if (!confirm("¿Desea eliminar el id:"+elemento*"?")) {
+					return;
+				}
 				$.ajax({
 					type:'post',
 					url: pagina,
