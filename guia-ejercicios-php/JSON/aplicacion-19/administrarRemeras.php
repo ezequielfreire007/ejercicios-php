@@ -142,7 +142,7 @@
         	$miJson = array();
 
     		$miJson["id"] = $txtId;
-    		$miJson["slogan"] = $txtSlogan;
+    		$miJson["s$txtId = count($objJSONaux) + 1;logan"] = $txtSlogan;
     		$miJson["size"] = $txtSize;
     		$miJson["price"] = $txtPrice;
     		$miJson["color"] = $txtColor;
@@ -211,7 +211,35 @@
 			
 		case 'modificarRemeras':
 			
-			$objetoModificar = isset($_POST['objetoModificar']) ? $_POST['objetoModificar']:NULL;
+			//tomo los datos enviados desde ajax
+			$txtSlogan = isset($_POST['txtSlogan']) ? $_POST['txtSlogan']:NULL;
+			$txtSize = isset($_POST['txtSize']) ? $_POST['txtSize']:NULL;
+			$txtPrice = isset($_POST['txtPrice']) ? $_POST['txtPrice']:NULL;
+			$txtColor = isset($_POST['txtColor']) ? $_POST['txtColor']:NULL;
+			$txtName = isset($_POST['txtName']) ? $_POST['txtName']:NULL;
+			$txtCountry = isset($_POST['txtCountry']) ? $_POST['txtCountry']:NULL;
+			$txtCity = isset($_POST['txtCity']) ? $_POST['txtCity']:NULL; 
+        	$txtId = isset($_POST['txtId']) ? $_POST['txtId']:NULL; 
+        	$txtLogo = "https://robohash.org/authicperferendis.bmp?size=50x50&set=set1";//imager harcodeada
+
+        	
+        
+        	echo "id llego".$txtId.'<br><br>';
+        	//Array con los datos y structura del json
+        	$miJson = array();
+
+    		$miJson["id"] = $txtId;
+    		$miJson["slogan"] = $txtSlogan;
+    		$miJson["size"] = $txtSize;
+    		$miJson["price"] = $txtPrice;
+    		$miJson["color"] = $txtColor;
+    		$miJson["manofacturer"]["name"] = $txtName;
+    		$miJson["manofacturer"]["logo"] = $txtLogo;
+    		$miJson["manofacturer"]["location"]["country"] = $txtCountry;
+    		$miJson["manofacturer"]["location"]["city"] = $txtCity;
+
+    		$objJson = json_encode($miJson);
+    		$objJson = json_decode($objJson);
 
 			//$objetoModificar = json_encode($objetoModificar);
 			//$objetoModificar = json_decode($objetoModificar);
@@ -224,21 +252,25 @@
 			while (!feof($archivoLectura)) {
 				$textJson .= fgetc($archivoLectura);
 			}
-			//cierro el archivo de lectura
+			//cierro el archivo de lectura y decodeo a json
 			fclose($archivoLectura);
 			$arrayJson = json_decode($textJson);
-
-			//var_dump($arrayJson);
-			var_dump($objetoModificar);
-		/*	for ($i=0; $i < count($arrayJson); $i++) { 
-				if ($arrayJson[$i]->id == $objetoModificar->id) {
-					$arrayJson[$i] = $objetoModificar;
+			var_dump($objJson) ;
+			for ($i=0; $i < count($arrayJson); $i++) { 
+				if ($arrayJson[$i]->id == $objJson->id) {
+					echo "ingresa al foreach";	
+					$arrayJson[$i] = $objJson;
 					//var_dump($arrayJson[$i]);
 					break;
 				}
 			}
 
-			$arrayEncode = json_encode($arrayJson);*/
+			$arrayEncode = json_encode($arrayJson);
+			$archivoEscribir = fopen("remeras.json","w");
+			fwrite($archivoEscribir, $arrayEncode);
+			fclose($archivoEscribir);
+
+			echo "Objeto modificado";
 			
 			break;
 	}

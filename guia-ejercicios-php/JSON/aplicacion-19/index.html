@@ -140,32 +140,45 @@
 				$("#txtCountry").val(miObjetoJSON.manofacturer.location.country);
 				$("#txtCity").val(miObjetoJSON.manofacturer.location.city);
 
-				var boton = '<input type="button" value="Modificar" onclick=modificarElemento()>';
+				var boton = '<input type="button" value="Modificar" onclick=modificarElemento('+elementoId+')>';
 				$("#divBtnModificar").html(boton);
 
 			}
 
-			function modificarElemento(){
+			function modificarElemento(elementoId){
 				alert("metodo modificar");
 				//confirmar si se desea modificar el elemento
-				if (!confirm("¿Desea modificar el id:"+miObjetoJSON.id*"?")) {
+				if (!confirm("¿Desea modificar el id:"+elementoId*"?")) {
 					return;
 				}
 
+
+				var id = elementoId;
+				
 				//genero el objeto con los valores modificados
-				var miObjeto = new Object();
+				
+			    /*var miObjeto = new Object();
 				miObjeto.slogan = $("#txtSlogan").val();
 				miObjeto.size = $("#txtSize").val();
 				miObjeto.color = $("#txtColor").val();
-				miObjeto.manofacturer.name = $("#txtName").val();
+				//miObjeto.manofacturer.name = $("#txtName").val();
 				miObjeto.manofacturer.location.country = $("#txtCountry").val();
 				miObjeto.manofacturer.location.city = $("#txtCity").val();
-
+				*/
 				$.ajax({
 					type:'post',
 					url: pagina,
 					dataType:'text',
-					data:{queHago:'modificarRemeras', objetoModificar:miObjeto}
+					data:{queHago:'modificarRemeras',
+						  txtId:id,	
+						  txtSlogan:$("#txtSlogan").val(),
+						  txtSize:$("#txtSize").val(),
+						  txtPrice:$("#txtPrice").val(),
+						  txtColor:$("#txtColor").val(),
+						  txtName:$("#txtName").val(),
+						  txtLogo:$("#txtLogo").val(),
+						  txtCountry:$("#txtCountry").val(),
+						  txtCity: $("#txtCity").val()}
 				})
 				.done(function(respuesta){
 					alert(respuesta);
