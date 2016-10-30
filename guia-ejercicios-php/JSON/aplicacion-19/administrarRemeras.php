@@ -232,8 +232,13 @@
 				}
 			}
 
-			fclose($archivoLectura)
+			//Encodeo el array json a un string json con el elemento modificado
+			$miJsonEncodeado = json_encode($miJsonArray);
+			$archivoEscribir = fopen("remeras.json", "w");
+			fwrite($archivoEscribir, $miJsonEncodeado);
 
+			fclose($archivoLectura);
+			fclose($archivoEscribir);
 			break;
 	}
  ?>

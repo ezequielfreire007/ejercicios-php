@@ -2,25 +2,32 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Aplicacion n°19</title>
+		<title>Aplicacion n°17</title>
 		<!-- Agrego la libreria de jquery-->
 		<script type="text/javascript" src="jquery.js"></script>
 		
 		<script type="text/javascript">
-
+<<<<<<< HEAD
 			//variables globales
 		    var eleccion = "";
-            var objJSON = new Object();
-            var miObjetoJSON = new Object();
-            var pagina = "administrarRemeras.php";			
+            var objJSON = "";
+            var pagina = "administrarRemeras.php";
+		    //Mostrar tabla 
+			function mostrar(hacerAlgo){
+
+				eleccion = hacerAlgo;
+				alert(eleccion);			
+=======
+			
+		    var eleccion = "";
+
 		   
 			function mostrar(hacerAlgo){
 
 				eleccion = hacerAlgo;
-				
 				alert(eleccion);
 				var pagina = "administrarRemeras.php";
-
+>>>>>>> fb061610d475a10737eb6d2e91180f07fc5574b8
 				//var pagina = "testIndex.php";
 
 				$.ajax({
@@ -44,7 +51,7 @@
 					alert(respuesta);
 					//return;
 					//Se parsea a json ya que se recibe texto desde el server
-					objJSON = respuesta;
+					var objJSON = respuesta;
 
 					//Tabla dinamica
 					var tabla = '<table>' // tr y th para encabezados de la tabla
@@ -59,13 +66,10 @@
 					tabla +=    '		<th>country</th>';
 					tabla +=    '		<th>city</th>';
 					tabla +=    '       <th>eliminar</th>';
-					tabla +=    '       <th>modificar</th>';
 					tabla +=    '	<tr>';
 
 					//Reocorro el objeto JSON y muestro cada objeto en la tabla
-					var auxJSON = "";
 					for (var i = 0; i < objJSON.length; i++) {
-						auxJSON = objJSON[i];
 						tabla += '  <tr>';
 						tabla += '  	<td>'+objJSON[i].id+'</td>';
 						tabla += '  	<td>'+objJSON[i].slogan+'</td>';
@@ -76,9 +80,11 @@
 						tabla += '  	<td>'+'<img src='+objJSON[i].manofacturer.logo+'/>'+'</td>';
 						tabla += '  	<td>'+objJSON[i].manofacturer.location.country+'</td>';
 						tabla += '  	<td>'+objJSON[i].manofacturer.location.city+'</td>';
+<<<<<<< HEAD
 						tabla += '      <td><input type="button" value="Eliminar" onclick=eliminiarElemento('+objJSON[i].id+')></td>';
-						tabla += '      <td><input type="button" value="Modificar" onclick=traerElementoModificar('+objJSON[i].id+')></td>';
-
+=======
+						tabla += '      <td><a id='+objJSON[i].id+' onclick='+alert("hola")+'>eliminar</td>';
+>>>>>>> fb061610d475a10737eb6d2e91180f07fc5574b8
 						tabla += '  </tr>';
 					}
 
@@ -90,21 +96,17 @@
 					alert(respuesta);
 					alert("Error en php");
 				})
+
+<<<<<<< HEAD
 			}
 
 			//Eliminar elemento seleccionado
 			function eliminiarElemento(elemento){
 				alert(elemento);
 				//return;
-				var datoEliminar = elemento;
-				
-				//confirm devuelve tru por eso se niega ya que solo si pongo que no ingresa al if y sale 
-				if (!confirm("¿Desea eliminar el id:"+datoEliminar*"?")) {
-					return;
-				}
 				$.ajax({
 					type:'post',
-					url: pagina,
+					url: "test.php",//pagina,
 					dataType:'text',
 					data: { queHago:"quitarRemera", id:elemento}, 
 					async:true
@@ -117,65 +119,11 @@
 					alert(respuesta);
 					alert("Error en php");
 				})
+=======
 
-			}
-
-			//Trae el elemento a modificar
-			function traerElementoModificar(elementoId)
-			{
-				alert("Elemento a modificar");
-				
-
-				for (var i = 0; i < objJSON.length; i++) {
-					if (objJSON[i].id == elementoId) {
-						miObjetoJSON = objJSON[i];
-					}
-				}
-	
-				//Seteo los valores del objeto en el imput
-				$("#txtSlogan").val(miObjetoJSON.slogan);
-				$("#txtSize").val(miObjetoJSON.size);
-				$("#txtPrice").val(miObjetoJSON.price);
-				$("#txtColor").val(miObjetoJSON.color);
-				$("#txtName").val(miObjetoJSON.manofacturer.name);
-				$("#txtCountry").val(miObjetoJSON.manofacturer.location.country);
-				$("#txtCity").val(miObjetoJSON.manofacturer.location.city);
-
-				var boton = '<input type="button" value="Modificar" onclick=modificarElemento()>';
-				$("#divBtnModificar").html(boton);
-
-			}
-
-			function modificarElemento(){
-				alert("metodo modificar");
-				//confirmar si se desea modificar el elemento
-				if (!confirm("¿Desea eliminar el id:"+miObjetoJSON.id*"?")) {
-					return;
-				}
-				var miObjeto = miObjetoJSON;
-				$.ajax({
-					type:'post',
-					url:pagina,
-					dataType:'text',
-					data:{queHago:'modificarRemeras', objetoModificar:miObjeto}
-				})
-				.done(function(respuesta){
-					alert(respuesta);
-					return;
-				})
-				.fail(function(respuesta){
-					alert(respuesta);
-					alert("error en php");
-				})
+>>>>>>> fb061610d475a10737eb6d2e91180f07fc5574b8
 			}
 		</script>
-
-		<style type="text/css">
-			input {
-				display: block;
-				
-			}
-		</style>
 	</head>
 	<body>
 		<div id="mostrarDaotos">
@@ -186,17 +134,15 @@
 
 		<div id="ingresoDatos">
 			<!--Datos de ingreso al server-->
-			<p>Slogan: <input type="text" id="txtSlogan" value="slogan" display:block>
-			<p>Size:   <input type="text" id="txtSize" value="size">
-			<p>Price:  <input type="text" id="txtPrice" value="price">
-			<p>Color:  <input type="text" id="txtColor" value="color">
-			<p>Name:   <input type="text" id="txtName" value="name">
-			<p>Country:<input type="text" id="txtCountry" value="country">
-			<p>City:   <input type="text" id="txtCity" value="city"><br><br>
-
+			<p>Solgan: <input type="text" id="txtSlogan">
+			<p>Size:   <input type="text" id="txtSize">
+			<p>Price:  <input type="text" id="txtPrice">
+			<p>Color:  <input type="text" id="txtColor">
+			<p>Name:   <input type="text" id="txtName">
+			<p>Country:<input type="text" id="txtCountry">
+			<p>City:   <input type="text" id="txtCity"><br><br>
 			<!--Boton para mostrar datos-->
 			<input type="button" value="Agregar Json" onclick='mostrar("agregarRemera")'>
-			<div id="divBtnModificar"></div>
 		</div>
 		<br>
 		<br>
