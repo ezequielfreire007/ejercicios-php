@@ -117,7 +117,7 @@
 			$txtName = isset($_POST['txtName']) ? $_POST['txtName']:NULL;
 			$txtCountry = isset($_POST['txtCountry']) ? $_POST['txtCountry']:NULL;
 			$txtCity = isset($_POST['txtCity']) ? $_POST['txtCity']:NULL; 
-        	$txtId = "";
+        	$txtId = 0;
         	$txtLogo = "https://robohash.org/authicperferendis.bmp?size=50x50&set=set1";//imager harcodeada
 
         	//Verifico si el archivo json existe
@@ -146,10 +146,10 @@
     		$miJson["size"] = $txtSize;
     		$miJson["price"] = $txtPrice;
     		$miJson["color"] = $txtColor;
-    		$miJson["manofacturer"]["nombre"] = $txtName;
+    		$miJson["manofacturer"]["name"] = $txtName;
     		$miJson["manofacturer"]["logo"] = $txtLogo;
-    		$miJson["manofacturer"] ["location"]["country"] = $txtCountry;
-    		$miJson["manofacturer"] ["location"]["city"] = $txtCity;
+    		$miJson["manofacturer"]["location"]["country"] = $txtCountry;
+    		$miJson["manofacturer"]["location"]["city"] = $txtCity;
 
     		//encode condifica el array a formato json y el decode genera un array obj json
     		$objJson = json_encode($miJson);
@@ -211,8 +211,12 @@
 			
 		case 'modificarRemeras':
 			
-			$objetoModificado = isset($_POST['objetoModificar']) ? $_POST['objetoModificar']:NULL;
-			//$arrayAux = array();
+			$objetoModificar = isset($_POST['objetoModificar']) ? $_POST['objetoModificar']:NULL;
+
+			//$objetoModificar = json_encode($objetoModificar);
+			//$objetoModificar = json_decode($objetoModificar);
+
+			//$arrayJson = array();
 			$archivoLectura = fopen("remeras.json", "r");
 			$textJson = "";
 
@@ -220,44 +224,22 @@
 			while (!feof($archivoLectura)) {
 				$textJson .= fgetc($archivoLectura);
 			}
-
+			//cierro el archivo de lectura
+			fclose($archivoLectura);
 			$arrayJson = json_decode($textJson);
 
-			//recorremos el array de json para remplazar el objeto por el nuevo
-			/*foreach ($arrayAux as $objJson) {
-				if ($objJSON->id == $objetoModificar->id) {
-					$objJSON->id = $objetoModificar->id;
-					$objJson->slogan = $objetoModificar->slogan;
-					$objJson->size = $objetoModificar->size;
-					$objJson->price = $objetoModificar->price;
-					$objJson->color = $objetoModificar->color;
-					$objJson->manofacturer->name = $objetoModificar->manofacturer->name;
-					$objJson->manofacturer->location->country = $objetoModificar->manofacturer->location->country;
-					$objJson->manofacturer->location->city = $objetoModificar->manofacturer->location->city;
-					echo "Ingreso al foreach";	
+			//var_dump($arrayJson);
+			var_dump($objetoModificar);
+		/*	for ($i=0; $i < count($arrayJson); $i++) { 
+				if ($arrayJson[$i]->id == $objetoModificar->id) {
+					$arrayJson[$i] = $objetoModificar;
+					//var_dump($arrayJson[$i]);
 					break;
-				}
-			}*/
-            $arrayAux = array();
-			for ($i=0; $i < count($arrayJson); $i++) { 
-				if ($arrayJson[$i]->id == $objetoModificado->id) {
-					array_push($arrayAux, $objetoModificado);
-				}else{
-					array_push($arrayAux, $arrayJson[$i]);	
 				}
 			}
 
-			$arrayEncode = array();
-
-			$arrayEncode = array_replace($arrayJson, $arrayAux);
-
-			//Encodeo el array json a un string json con el elemento modificado
-			$miJsonEncodeado = json_encode($$arrayEncode);
-			$archivoEscribir = fopen("remeras.json", "w");
-			fwrite($archivoEscribir, $miJsonEncodeado);
-
-			fclose($archivoLectura);
-			fclose($archivoEscribir);
+			$arrayEncode = json_encode($arrayJson);*/
+			
 			break;
 	}
  ?>

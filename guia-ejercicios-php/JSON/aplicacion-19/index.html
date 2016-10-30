@@ -18,8 +18,7 @@
 
 				eleccion = hacerAlgo;
 				
-				alert(eleccion);
-				var pagina = "administrarRemeras.php";
+				alert(eleccion);			
 
 				//var pagina = "testIndex.php";
 
@@ -149,13 +148,22 @@
 			function modificarElemento(){
 				alert("metodo modificar");
 				//confirmar si se desea modificar el elemento
-				if (!confirm("¿Desea eliminar el id:"+miObjetoJSON.id*"?")) {
+				if (!confirm("¿Desea modificar el id:"+miObjetoJSON.id*"?")) {
 					return;
 				}
-				var miObjeto = miObjetoJSON;
+
+				//genero el objeto con los valores modificados
+				var miObjeto = new Object();
+				miObjeto.slogan = $("#txtSlogan").val();
+				miObjeto.size = $("#txtSize").val();
+				miObjeto.color = $("#txtColor").val();
+				miObjeto.manofacturer.name = $("#txtName").val();
+				miObjeto.manofacturer.location.country = $("#txtCountry").val();
+				miObjeto.manofacturer.location.city = $("#txtCity").val();
+
 				$.ajax({
 					type:'post',
-					url:pagina,
+					url: pagina,
 					dataType:'text',
 					data:{queHago:'modificarRemeras', objetoModificar:miObjeto}
 				})
